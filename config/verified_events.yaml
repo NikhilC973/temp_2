@@ -1,0 +1,211 @@
+# ============================================================
+# South Shore Sentiment Study — Verified Event Timeline
+# ============================================================
+# Sources: Block Club Chicago investigative reporting (Level 2 verified)
+# These events are used for timeline overlays, phase definitions,
+# and contextualizing sentiment trajectory shifts.
+#
+# Verification Levels:
+#   L1: Official government/court records, FOIA
+#   L2: Multi-source investigative journalism (2+ reporters)
+#   L3: Single-source media report
+#   L4: Social media / unverified
+# ============================================================
+
+events:
+  # ── Pre-Raid Context ──────────────────────────────────────
+  - date: "2025-06-23"
+    event: "City inspectors visit 7500 S. South Shore Dr but leave due to security concerns"
+    detail: "Chicago building inspectors unable to complete inspection due to police activity at the property"
+    source: "Block Club Chicago"
+    source_url: "https://blockclubchicago.org/2025/11/07/all-residents-to-leave-as-court-takes-control-of-south-shore-building-raided-by-feds/"
+    verification: L2
+    phase_impact: pre
+
+  - date: "2025-06-24"
+    event: "Murder at 7500 S. South Shore Dr"
+    detail: "Jose Javier Coronado-Meza charged with murder of Gregori Arias inside the building"
+    source: "Block Club Chicago"
+    source_url: "https://blockclubchicago.org/2025/11/07/all-residents-to-leave-as-court-takes-control-of-south-shore-building-raided-by-feds/"
+    verification: L2
+    phase_impact: pre
+
+  - date: "2025-09-26"
+    event: "Feds tear gas and shoot rubber bullets at protesters outside Broadview ICE facility"
+    detail: "Federal agents use force against protesters at ICE facility at 1930 Beach St, Broadview"
+    source: "Block Club Chicago"
+    source_url: "https://blockclubchicago.org/2025/10/03/this-week-in-photos-feds-raid-south-shore-building-quantum-project-breaks-ground-and-more/"
+    verification: L2
+    phase_impact: pre
+
+  # ── The Raid (t=0) ────────────────────────────────────────
+  - date: "2025-09-30"
+    event: "Operation Midway Blitz — ICE/CBP/FBI/ATF raid at 7500 S. South Shore Dr"
+    detail: >
+      Hundreds of camouflaged federal agents in rented moving trucks and unmarked vans,
+      with helicopter support, raided the 130-unit apartment building at approximately 2 AM.
+      At least 37 people arrested. Agents broke doors, windows; used flashbangs.
+      Residents including women, children, and elderly were detained or displaced.
+      15 emergency calls made to dispatchers on this day alone.
+    source: "Block Club Chicago, AP, WBEZ"
+    source_url: "https://blockclubchicago.org/2025/09/30/armed-agents-in-unmarked-vans-target-south-shore-apartment-building/"
+    verification: L1
+    phase_impact: event
+    key_actors:
+      - "U.S. Border Patrol (CBP)"
+      - "FBI Chicago"
+      - "ATF"
+      - "ICE"
+    key_quotes:
+      - speaker: "Border Patrol chief Greg Bovino"
+        quote_summary: "Claimed raid would make neighborhood safe and secure"
+      - speaker: "ICE spokesperson Emily Covington"
+        quote_summary: "Denied detainees were placed in U-Haul trucks despite photographic evidence"
+      - speaker: "Neighbor KT O'Loughlin"
+        quote_summary: "Described the scene as feeling like a war zone"
+
+  # ── Immediate Aftermath ───────────────────────────────────
+  - date: "2025-10-01"
+    event: "Residents return to ransacked apartments"
+    detail: >
+      Residents found doors broken, belongings stolen, apartments ransacked.
+      Army veteran Dan Jones found his apartment looted. Zip ties and blood stains
+      found on floors next to baby shoes. Water damage, caved-in ceilings, flies
+      swarming around open fridges. Small moving crews hired to clear vacant units.
+    source: "Block Club Chicago"
+    source_url: "https://blockclubchicago.org/2025/10/02/south-shore-residents-return-to-ransacked-apartments-try-to-move-out-after-ice-raid-it-looks-like-hell/"
+    verification: L2
+    phase_impact: post_week1
+
+  - date: "2025-10-02"
+    event: "Building ownership traced to Wisconsin-based investor Trinity Flood"
+    detail: >
+      Property part of 'Jackson Park Portfolio' listed for $15M+ despite under $3M
+      market value. Flood faces foreclosure for defaulting on loan payments on three
+      South Shore properties purchased in 2020.
+    source: "Block Club Chicago"
+    source_url: "https://blockclubchicago.org/2025/10/02/south-shore-residents-return-to-ransacked-apartments-try-to-move-out-after-ice-raid-it-looks-like-hell/"
+    verification: L2
+    phase_impact: post_week1
+
+  # ── Investigation & Court Actions ─────────────────────────
+  - date: "2025-10-24"
+    event: "Block Club reports thousands of pre-raid distress calls to city"
+    detail: >
+      Investigation reveals building averaged more than one emergency call per day
+      over nearly five years before the raid. Records reviewed by Block Club show
+      pattern of neglect. Only one drug-related call in 2025 (July 30), which
+      police labeled '19-Boy' (nothing to see here).
+    source: "Block Club Chicago"
+    source_url: "https://blockclubchicago.org/2025/10/24/south-shore-residents-made-thousands-of-distress-calls-to-city-before-massive-federal-raid/"
+    verification: L2
+    phase_impact: post_weeks3_5
+
+  - date: "2025-11-07"
+    event: "Judge orders building cleared, appoints receiver"
+    detail: >
+      Cook County Judge Debra Seaton declares building 'a waiting trap for a fire'
+      and orders all residents moved out. Appoints receiver Jared Friedman to
+      secure building. Owner Trinity Flood loses control of property.
+      Six remaining residents testify they'd move if given financial assistance.
+    source: "Block Club Chicago"
+    source_url: "https://blockclubchicago.org/2025/11/07/all-residents-to-leave-as-court-takes-control-of-south-shore-building-raided-by-feds/"
+    verification: L2
+    phase_impact: post_weeks3_5
+
+  # ── Tenants Union & Displacement ──────────────────────────
+  - date: "2025-11-24"
+    event: "Tenants union forms, demands relocation assistance"
+    detail: >
+      ~30 remaining tenants form union demanding $7,500 relocation fees,
+      heat, security, sewage cleanup, elevator repair, and rodent removal.
+      Court-appointed manager Friedman has not provided promised assistance.
+      Organizer Infiniti Gant (Southside Together) supports residents.
+    source: "Block Club Chicago"
+    source_url: "https://blockclubchicago.org/2025/11/24/raided-south-shore-buildings-remaining-tenants-say-they-havent-received-court-ordered-help/"
+    verification: L2
+    phase_impact: displacement
+
+  - date: "2025-12-02"
+    event: "Remaining residents seek extra time to move out"
+    detail: >
+      37 known occupants remain, 25 in the tenants union. Workers installing
+      steel window guards in preparation for vacancy. Residents call deadline
+      'impossible' for finding new housing on short notice.
+    source: "Block Club Chicago"
+    source_url: "https://blockclubchicago.org/2025/12/02/remaining-residents-of-raided-south-shore-building-seek-extra-time-to-move-out/"
+    verification: L2
+    phase_impact: displacement
+
+  - date: "2025-12-08"
+    event: "Judge denies extension, sets Dec 12 eviction deadline"
+    detail: >
+      Judge Seaton denies tenants union request for 60 more days and $7,500
+      relocation fees. Offers $5,000 relocation assistance instead.
+      Judge dismisses mayor's letter requesting union demands be met.
+      'I don't care about political statements' — Judge Seaton.
+    source: "Block Club Chicago"
+    source_url: "https://blockclubchicago.org/2025/12/08/raided-south-shore-building-to-be-cleared-friday-after-judge-denies-residents-motion-for-more-time/"
+    verification: L2
+    phase_impact: displacement
+
+  - date: "2025-12-12"
+    event: "Building vacated — all residents leave by court deadline"
+    detail: "All remaining residents move out by the court-ordered deadline"
+    source: "Block Club Chicago"
+    source_url: "https://blockclubchicago.org/2025/12/08/raided-south-shore-building-to-be-cleared-friday-after-judge-denies-residents-motion-for-more-time/"
+    verification: L2
+    phase_impact: displacement
+
+  # ── Long-term Fallout ─────────────────────────────────────
+  - date: "2026-01-14"
+    event: "Former resident Samantha Stamps reported missing"
+    detail: >
+      Stamps, 56, a vocal building resident, reported missing after experiencing
+      homelessness following forced move-out. Last seen near Central Park Pink Line
+      station Jan 2. Later found by Chicago police.
+    source: "Block Club Chicago"
+    source_url: "https://blockclubchicago.org/2026/01/14/former-resident-of-south-shore-building-raided-by-feds-is-now-missing-police-say/"
+    verification: L2
+    phase_impact: long_term
+
+  - date: "2026-01-22"
+    event: "State opens investigation into landlord tipping off feds"
+    detail: >
+      Illinois Department of Human Rights files housing discrimination charge
+      investigating whether Trinity Flood and Strength in Management worked with
+      federal immigration agents to remove and intimidate Black and Latino tenants.
+      Governor Pritzker's office announces investigation.
+    source: "Block Club Chicago"
+    source_url: "https://blockclubchicago.org/2026/01/22/did-landlord-tip-off-immigration-raid-at-troubled-south-shore-building-the-state-is-investigating/"
+    verification: L2
+    phase_impact: long_term
+
+# ── Key Entities ────────────────────────────────────────────
+entities:
+  building:
+    address: "7500 S. South Shore Drive"
+    neighborhood: "South Shore"
+    community_area: 43
+    units: 130
+    owner: "Trinity Flood (Wisconsin-based investor)"
+    property_manager: "Strength in Management (CEO: Corey Oliver)"
+    court_receiver: "Jared Friedman (Friedman Real Estate)"
+
+  operation:
+    name: "Operation Midway Blitz"
+    date: "2025-09-30"
+    agencies: ["CBP", "FBI", "ATF", "ICE"]
+    arrested: 37
+    agents: "Hundreds (camouflaged, with helicopters)"
+
+  community_orgs:
+    - "Southside Together Organizing for Power (STOP)"
+    - "7500 S. South Shore Dr Tenants Union"
+    - "National Immigrant Justice Center (NIJC)"
+    - "Illinois Coalition for Immigrant and Refugee Rights"
+
+  journalism:
+    primary_source: "Block Club Chicago"
+    reporters: ["Mack Liederman", "Maxwell Evans", "Mick Dumke"]
+    photographer: "Colin Boyle"

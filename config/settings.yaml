@@ -1,0 +1,283 @@
+# ============================================================
+# South Shore Sentiment Study — Central Configuration
+# ============================================================
+# Updated: Extended analysis window to Dec 12, 2025
+# Added verified event sourcing from Block Club Chicago
+
+project:
+  name: "South Shore Sentiment Study"
+  version: "2.0.0"
+  anchor_event: "ICE/CBP raid in South Shore, Chicago"
+  t_zero: "2025-09-30T06:00:00-05:00"  # CDT
+
+# ----------------------------------------------------------
+# Time windows (EXTENDED to capture full aftermath)
+# ----------------------------------------------------------
+windows:
+  collection_start: "2025-09-16"
+  collection_end: "2025-10-14"
+  extended_end: "2025-12-12"  # Building vacated by court order
+
+phases:
+  pre:
+    start: "2025-09-16"
+    end: "2025-09-29"
+    label: "Pre-Raid Baseline"
+  event:
+    start: "2025-09-29"
+    end: "2025-10-01"
+    label: "Event Window (±24h)"
+  post_week1:
+    start: "2025-10-01"
+    end: "2025-10-07"
+    label: "Post-Raid Week 1"
+  post_week2:
+    start: "2025-10-08"
+    end: "2025-10-14"
+    label: "Post-Raid Week 2"
+  post_weeks3_5:
+    start: "2025-10-15"
+    end: "2025-11-07"
+    label: "Extended Monitoring"
+  court_action:
+    start: "2025-11-08"
+    end: "2025-11-30"
+    label: "Court Action & Tenants Union"
+  displacement:
+    start: "2025-12-01"
+    end: "2025-12-12"
+    label: "Forced Displacement"
+
+# ----------------------------------------------------------
+# Verified event sources
+# ----------------------------------------------------------
+verified_events_file: "config/verified_events.yaml"
+
+# ----------------------------------------------------------
+# Reddit collection (no official API)
+# ----------------------------------------------------------
+reddit:
+  subreddits:
+    - "Chicago"
+    - "news"
+    - "Illinois"
+    - "AskChicago"
+    - "50501Chicago"
+    - "EyesOnIce"
+    - "moderatepolitics"
+    - "politics"
+    - "ICE_Raids"
+    - "WindyCity"
+    - "AskConservatives"
+    - "somethingiswrong2024"
+    - "immigration"
+    - "ChicagoSuburbs"
+
+  search_terms:
+    - "South Shore ICE"
+    - "South Shore raid"
+    - "South Shore immigration"
+    - "South Shore Chicago raid"
+    - "Chicago ICE raid"
+    - "Operation Midway Blitz"
+    - "South Shore helicopters"
+    - "South Shore flashbang"
+    - "ICE raid Chicago apartment"
+    - "South Shore CBP"
+    - "Chicago immigration enforcement"
+    # Extended search terms for later phases
+    - "7500 South Shore Drive"
+    - "South Shore tenants union"
+    - "South Shore eviction"
+    - "Trinity Flood South Shore"
+    - "South Shore building cleared"
+
+  # PullPush.io (Pushshift successor)
+  pullpush:
+    base_url: "https://api.pullpush.io/reddit"
+    submissions_endpoint: "/search/submission/"
+    comments_endpoint: "/search/comment/"
+    rate_limit_seconds: 2.0
+    max_results_per_query: 500
+
+  # Old Reddit JSON fallback
+  old_reddit:
+    base_url: "https://old.reddit.com"
+    rate_limit_seconds: 2.5
+    user_agent: "SouthShoreSentimentStudy/2.0 (Academic Research)"
+
+# ----------------------------------------------------------
+# News sources
+# ----------------------------------------------------------
+news:
+  sources:
+    - name: "Block Club Chicago"
+      domain: "blockclubchicago.org"
+      search_url: "https://blockclubchicago.org/?s={query}"
+      robots_compliant: true
+      rate_limit_seconds: 3.0
+      note: "Primary verified source — robots.txt blocks scraping, use as citation only"
+
+    - name: "WBEZ"
+      domain: "wbez.org"
+      search_url: "https://www.wbez.org/search?q={query}"
+      robots_compliant: true
+      rate_limit_seconds: 3.0
+
+    - name: "Chicago Sun-Times"
+      domain: "chicago.suntimes.com"
+      search_url: "https://chicago.suntimes.com/?s={query}"
+      robots_compliant: true
+      rate_limit_seconds: 3.0
+
+    - name: "South Side Weekly"
+      domain: "southsideweekly.com"
+      search_url: "https://southsideweekly.com/?s={query}"
+      robots_compliant: true
+      rate_limit_seconds: 3.0
+
+    - name: "AP News"
+      domain: "apnews.com"
+      search_url: "https://apnews.com/search?q={query}"
+      robots_compliant: true
+      rate_limit_seconds: 3.0
+
+  search_queries:
+    - "South Shore ICE raid"
+    - "Chicago ICE raid apartment"
+    - "Operation Midway Blitz"
+    - "South Shore immigration enforcement"
+    - "7500 South Shore Drive eviction"
+    - "South Shore tenants union"
+
+# ----------------------------------------------------------
+# NLP models
+# ----------------------------------------------------------
+models:
+  vader:
+    enabled: true
+
+  roberta:
+    model_name: "cardiffnlp/twitter-roberta-base-sentiment-latest"
+    max_length: 512
+    batch_size: 32
+
+  goemotions:
+    model_name: "monologg/bert-base-cased-goemotions-original"
+    max_length: 512
+    batch_size: 32
+    target_emotions:
+      - fear
+      - anger
+      - sadness
+      - joy
+      - surprise
+      - disgust
+      - gratitude
+      - pride
+    emotion_mapping:
+      # GoEmotions 27-label → our 8 target emotions
+      admiration: pride
+      amusement: joy
+      anger: anger
+      annoyance: anger
+      approval: gratitude
+      caring: gratitude
+      confusion: fear
+      curiosity: surprise
+      desire: joy
+      disappointment: sadness
+      disapproval: anger
+      disgust: disgust
+      embarrassment: sadness
+      excitement: joy
+      fear: fear
+      gratitude: gratitude
+      grief: sadness
+      joy: joy
+      love: gratitude
+      nervousness: fear
+      optimism: joy
+      pride: pride
+      realization: surprise
+      relief: joy
+      remorse: sadness
+      sadness: sadness
+      surprise: surprise
+
+  bertopic:
+    min_topic_size: 5
+    nr_topics: "auto"
+    top_n_words: 10
+    embedding_model: "all-MiniLM-L6-v2"
+
+  spacy:
+    model: "en_core_web_sm"
+
+# ----------------------------------------------------------
+# Geo tagging
+# ----------------------------------------------------------
+geography:
+  primary_area: "South Shore"
+  community_area_number: 43
+  primary_zip: "60649"
+  neighborhoods:
+    south_shore:
+      terms: ["South Shore", "south shore", "71st", "Jeffery", "67th",
+              "79th and Exchange", "7500 S. South Shore", "7500 South Shore"]
+      community_area: 43
+    south_chicago:
+      terms: ["South Chicago", "south chicago", "83rd", "Commercial Ave"]
+      community_area: 46
+    woodlawn:
+      terms: ["Woodlawn", "woodlawn", "63rd", "Cottage Grove"]
+      community_area: 42
+    greater_grand_crossing:
+      terms: ["Grand Crossing", "grand crossing", "75th"]
+      community_area: 69
+    avalon_park:
+      terms: ["Avalon Park", "avalon park", "79th"]
+      community_area: 45
+    calumet_heights:
+      terms: ["Calumet Heights", "calumet heights"]
+      community_area: 47
+
+# ----------------------------------------------------------
+# Confidence & quality
+# ----------------------------------------------------------
+confidence:
+  emotion_threshold: 0.3       # Minimum probability to count as "detected"
+  high_confidence: 0.6         # High-confidence emotion label
+  qc_sample_size: 100          # Manual review sample size
+  bootstrap_iterations: 1000   # For confidence intervals
+
+# ----------------------------------------------------------
+# Paths
+# ----------------------------------------------------------
+paths:
+  db: "data/sentiment_study.duckdb"
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  synthetic_dir: "data/synthetic"
+  exports_dir: "data/exports"
+
+# ----------------------------------------------------------
+# Synthetic data (fallback when live sources unavailable)
+# ----------------------------------------------------------
+synthetic:
+  n_posts: 3500  # Increased for extended window
+  seed: 42
+  platforms: ["reddit", "news_comment"]
+  subreddit_weights:
+    Chicago: 0.30
+    news: 0.15
+    Illinois: 0.10
+    politics: 0.10
+    AskChicago: 0.08
+    EyesOnIce: 0.07
+    moderatepolitics: 0.05
+    WindyCity: 0.05
+    ICE_Raids: 0.04
+    AskConservatives: 0.03
+    somethingiswrong2024: 0.02
+    50501Chicago: 0.01

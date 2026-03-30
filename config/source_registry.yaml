@@ -1,0 +1,120 @@
+# ============================================================
+# Source Registry — Compliance & Rate Limit Documentation
+# ============================================================
+# Each source documents: endpoint, rate limits, robots.txt
+# compliance, data retention policy, and legal basis.
+
+sources:
+  # ── Reddit Alternatives (No Official API) ──────────────
+  pullpush_io:
+    name: "PullPush.io (Pushshift Successor)"
+    type: "api"
+    base_url: "https://api.pullpush.io/reddit"
+    rate_limit: "2 seconds between requests"
+    robots_compliant: true
+    legal_basis: "Public Reddit data archive; academic/research use"
+    data_scope: "Submissions and comments from public subreddits"
+    notes: "Successor to Pushshift; provides historical Reddit search"
+
+  old_reddit_json:
+    name: "Old Reddit JSON Interface"
+    type: "web_json"
+    base_url: "https://old.reddit.com/r/{subreddit}/.json"
+    rate_limit: "2.5 seconds between requests; respectful User-Agent"
+    robots_compliant: true
+    legal_basis: "Public web interface; JSON is standard browser-accessible format"
+    data_scope: "Current listings and search results (not historical)"
+    notes: "Fallback when PullPush unavailable; limited to recent posts"
+
+  arctic_shift:
+    name: "Arctic Shift Reddit Archive"
+    type: "bulk_download"
+    base_url: "https://arctic-shift.io"
+    rate_limit: "N/A (bulk files)"
+    robots_compliant: true
+    legal_basis: "Public Reddit data archive"
+    data_scope: "Monthly Reddit data dumps"
+    notes: "For large-scale historical analysis; download and filter locally"
+
+  # ── News Sources ────────────────────────────────────────
+  block_club_chicago:
+    name: "Block Club Chicago"
+    type: "news_scraping"
+    domain: "blockclubchicago.org"
+    rate_limit: "3 seconds between requests"
+    robots_compliant: true
+    legal_basis: "Public news articles; comment extraction from public pages"
+    notes: "Some articles may be paywalled. Respect robots.txt directives."
+
+  wbez:
+    name: "WBEZ Chicago"
+    type: "news_scraping"
+    domain: "wbez.org"
+    rate_limit: "3 seconds between requests"
+    robots_compliant: true
+    legal_basis: "Public news; NPR affiliate"
+    notes: "Primary source for raid timeline and enforcement details"
+
+  chicago_sun_times:
+    name: "Chicago Sun-Times"
+    type: "news_scraping"
+    domain: "chicago.suntimes.com"
+    rate_limit: "3 seconds between requests"
+    robots_compliant: true
+    legal_basis: "Public news articles"
+    notes: "May have paywall. Only scrape publicly accessible content."
+
+  south_side_weekly:
+    name: "South Side Weekly"
+    type: "news_scraping"
+    domain: "southsideweekly.com"
+    rate_limit: "3 seconds between requests"
+    robots_compliant: true
+    legal_basis: "Public nonprofit journalism"
+    notes: "Key source for 911 audio story and community impact reporting"
+
+  ap_news:
+    name: "Associated Press"
+    type: "news_scraping"
+    domain: "apnews.com"
+    rate_limit: "3 seconds between requests"
+    robots_compliant: true
+    legal_basis: "Public news wire"
+    notes: "Source for national coverage of Midway Blitz operation"
+
+# ── Verification Levels ──────────────────────────────────
+verification_levels:
+  official:
+    level: 1
+    label: "Official / FOIA"
+    description: "Government press releases, court filings, FOIA documents"
+    confidence: "high"
+    examples:
+      - "DHS statement on Operation Midway Blitz"
+      - "Court records"
+
+  two_source_media:
+    level: 2
+    label: "Two-Source Media/Advocacy"
+    description: "Confirmed by at least two independent media or advocacy organizations"
+    confidence: "medium-high"
+    examples:
+      - "WBEZ + AP both reporting same event details"
+      - "NIJC + Block Club confirming timeline"
+
+  single_source_media:
+    level: 3
+    label: "Single-Source Media"
+    description: "Reported by one credible media outlet but not independently confirmed"
+    confidence: "medium"
+    examples:
+      - "South Side Weekly 911 audio story (single source)"
+
+  social_mention:
+    level: 4
+    label: "Social Mention"
+    description: "Individual social media post or comment without media confirmation"
+    confidence: "low"
+    examples:
+      - "Reddit user reporting helicopters"
+      - "Comment about property damage"

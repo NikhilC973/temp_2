@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Data (generated at runtime — not committed)
+data/raw/*
+data/processed/*
+data/exports/*
+data/*.duckdb
+data/*.duckdb.wal
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/exports/.gitkeep
+
+# Reports (generated)
+reports/*.xlsx
+reports/*.pdf
+
+# Environment
+.env
+*.env.local
+
+# Power BI
+*.pbix
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Models (too large for git)
+data/processed/bertopic_model/
+
+# Jupyter
+.ipynb_checkpoints/
