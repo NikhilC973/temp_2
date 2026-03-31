@@ -7,14 +7,14 @@ DARK_BORDER = "#333333"
 TEXT_COLOR = "#FAFAFA"
 
 EMOTION_COLORS = {
-    "fear": "#E74C3C",
-    "anger": "#C0392B",
-    "sadness": "#3498DB",
-    "joy": "#F1C40F",
+    "fear": "#FF4444",
+    "anger": "#FF8C00",
+    "sadness": "#4A90D9",
+    "joy": "#FFE135",
     "surprise": "#9B59B6",
     "disgust": "#1ABC9C",
-    "gratitude": "#2ECC71",
-    "pride": "#E67E22",
+    "gratitude": "#00E676",
+    "pride": "#FF69B4",
 }
 
 KEY_EMOTIONS = ["fear", "anger", "joy", "gratitude", "sadness", "pride"]

@@ -9,7 +9,9 @@ from src.visualization.chart_style import EMOTION_COLORS, KEY_EMOTIONS, apply_da
 
 
 def create_emotion_trajectory_chart(
-    daily_df: pd.DataFrame, title: str = "Emotion Trajectories Over Time"
+    daily_df: pd.DataFrame,
+    title: str = "Emotion Trajectories Over Time",
+    selected_emotions: list[str] | None = None,
 ) -> go.Figure:
     fig = make_subplots(
         rows=2,
@@ -20,7 +22,8 @@ def create_emotion_trajectory_chart(
         subplot_titles=("Emotion Intensity", "Post Volume"),
     )
 
-    for emo in KEY_EMOTIONS:
+    display_emotions = selected_emotions if selected_emotions else KEY_EMOTIONS
+    for emo in display_emotions:
         col = f"{emo}_mean"
         if col in daily_df.columns:
             fig.add_trace(

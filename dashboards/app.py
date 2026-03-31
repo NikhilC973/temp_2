@@ -80,6 +80,14 @@ with st.sidebar:
         format_func=lambda x: PHASES[x]["label"],
     )
 
+    all_emotions = ["fear", "anger", "joy", "gratitude", "sadness", "pride"]
+    selected_emotions = st.multiselect(
+        "Emotions",
+        options=all_emotions,
+        default=all_emotions,
+        format_func=lambda x: x.capitalize(),
+    )
+
     st.markdown("---")
     if not data["phase"].empty:
         st.download_button("📥 Phase Data", data["phase"].to_csv(index=False), "phase_emotions.csv")
@@ -105,7 +113,7 @@ with tab1:
                 cols[i % len(cols)].metric(info["label"], "0 posts")
 
     if not data["daily"].empty:
-        fig = create_emotion_trajectory_chart(data["daily"])
+        fig = create_emotion_trajectory_chart(data["daily"], selected_emotions=selected_emotions)
         st.plotly_chart(fig, theme=None, width="stretch")
 
     c1, c2 = st.columns(2)
