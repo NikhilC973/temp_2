@@ -9,7 +9,6 @@ API Key: Set YOUTUBE_API_KEY environment variable.
 Free tier: 10,000 quota units/day.
 """
 
-import hashlib
 import os
 import time
 from datetime import datetime, timezone

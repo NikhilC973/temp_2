@@ -8,13 +8,13 @@ Usage:
 Requires: pip install psycopg2-binary
 """
 
-import os
 import argparse
+import os
 from datetime import date, timedelta
 
 import pandas as pd
 
-from src.utils.constants import PHASES, NEIGHBORHOOD_LEXICON, PLATFORMS
+from src.utils.constants import NEIGHBORHOOD_LEXICON, PHASES
 from src.utils.db import get_connection as get_duckdb
 from src.utils.logger import log
 

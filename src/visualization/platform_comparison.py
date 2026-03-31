@@ -7,10 +7,8 @@ engagement, and response patterns across the three data sources.
 Used by: Streamlit dashboard (tab), Power BI (exported images), report.
 """
 
-import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 
 from src.utils.constants import PHASES, TARGET_EMOTIONS
 from src.utils.logger import log
