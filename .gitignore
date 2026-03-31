@@ -47,3 +47,12 @@ data/processed/bertopic_model/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Allow export parquets for Streamlit Cloud
+
+# Allow export parquets for Streamlit Cloud
+!data/exports/phase_emotions.parquet
+!data/exports/daily_emotions.parquet
+!data/exports/platform_contrast.parquet
+!data/exports/geo_emotions.parquet
+!data/processed/topics.parquet
