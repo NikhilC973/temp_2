@@ -56,3 +56,10 @@ data/processed/bertopic_model/
 !data/exports/platform_contrast.parquet
 !data/exports/geo_emotions.parquet
 !data/processed/topics.parquet
+
+# Real result files needed for Streamlit Cloud demo
+!data/exports/phase_emotions.parquet
+!data/exports/daily_emotions.parquet
+!data/exports/platform_contrast.parquet
+!data/exports/geo_emotions.parquet
+!data/processed/topics.parquet

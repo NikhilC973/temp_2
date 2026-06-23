@@ -30,6 +30,8 @@ st.markdown(
     """
     <style>
       .block-container { padding-top: 2.5rem; }
+      [data-testid="stMetricValue"] { font-size: 1.4rem; }
+      [data-testid="stMetricLabel"] { font-size: 0.85rem; }
     </style>
     """,
     unsafe_allow_html=True,
@@ -161,13 +163,13 @@ with tab4:
     st.header("Methodology & Ethics")
     st.markdown(
         """
-**Sources:** 14 subreddits + 5 news sites + YouTube Data API v3 | **Window:** Sep 16 – Dec 12, 2025 (7 phases) | **NLP:** VADER + RoBERTa + GoEmotions + BERTopic
+**Sources:** YouTube Data API v3 (primary, 15,113 posts) + news outlets (South Side Weekly, AP) | **Window:** Sep 16 – Dec 12, 2025 (7 phases) | **NLP:** VADER + RoBERTa + GoEmotions + BERTopic
 
 **Verification:** L1 Official/FOIA → L2 Two-Source Media → L3 Single-Source → L4 Social
 
 **Ethics:** Public data only • No PII • Aggregate outputs • Removal channel available • Community-first orientation
 
-**Limitations:** Selection bias (Reddit ≠ all residents) • Platform bias • Geo-inference from text • Model uncertainty • Twitter/X excluded
+**Limitations:** YouTube-dominant sample (public commentary ≠ all residents) • Reddit unavailable during collection (PullPush.io outage + API blocks) • Geo-inference from text mentions, not GPS • Model uncertainty • Some non-English comments • Twitter/X excluded (API cost)
 """
     )
 
@@ -176,37 +178,33 @@ with tab5:
     st.dataframe(
         pd.DataFrame(
             {
-                "Window": [
-                    "0–24h",
-                    "Days 2–5",
-                    "Days 5–14",
-                    "Weeks 3–5",
-                    "Weeks 6–8",
-                    "Weeks 9–10",
+                "Phase": [
+                    "Pre-Raid Baseline",
+                    "Event Window",
+                    "Post-Raid Week 1",
+                    "Post-Raid Week 2",
+                    "Extended Monitoring",
+                    "Court Action",
+                    "Displacement",
                 ],
-                "Priority": [
-                    "Crisis comms; know-your-rights; hotlines",
-                    "Legal aid; trauma counseling; damage docs",
-                    "Mutual aid; school support; organizing",
-                    "Case management; policy advocacy; infrastructure",
-                    "Tenant union support; housing advocacy; court monitoring",
-                    "Emergency relocation; housing navigation; homelessness prevention",
+                "Posts": [773, 887, 3592, 2668, 5123, 1020, 1050],
+                "Dominant Emotion (observed)": [
+                    "Gratitude (low intensity)",
+                    "Gratitude + anger onset",
+                    "Anger building + gratitude",
+                    "Anger + gratitude sustained",
+                    "Gratitude peak + anger",
+                    "Anger resurgence",
+                    "Mixed (anger + sadness)",
                 ],
-                "Emotion": [
-                    "Fear + confusion peak",
-                    "Anger + organizing",
-                    "Solidarity + gratitude",
-                    "Pride + resilience",
-                    "Anger resurgence + sadness",
-                    "Sadness + fear resurgence",
-                ],
-                "Priority Level": [
-                    "🔴 CRITICAL",
-                    "🟠 HIGH",
-                    "🟠 HIGH",
-                    "🟡 MEDIUM",
-                    "🟠 HIGH",
-                    "🔴 CRITICAL",
+                "Engagement Priority": [
+                    "🟡 LOW",
+                    "🟠 MEDIUM",
+                    "🔴 HIGH",
+                    "🔴 HIGH",
+                    "🔴 HIGH",
+                    "🟠 MEDIUM",
+                    "🟠 MEDIUM",
                 ],
             }
         ),
@@ -214,7 +212,11 @@ with tab5:
         hide_index=True,
     )
     st.success(
-        "**Critical windows: Days 2–7 and Weeks 9–10.** "
-        "Fear transforms to organized anger in Week 1 — deploy resources here. "
-        "Second crisis emerges during displacement phase as housing insecurity triggers re-traumatization."
+        "**Priority is derived from observed discourse volume and emotion intensity.** "
+        "Community engagement peaked during Post-Raid Weeks 1-2 and Extended Monitoring "
+        "(3,592–5,123 posts each), dominated by gratitude and rising anger — the optimal "
+        "window for solidarity and organizing resources. Anger resurged during Court Action. "
+        "Note: this reflects public YouTube discourse, which channels collective response; "
+        "fear-driven needs (crisis counseling) may not surface in public commentary and "
+        "require separate assessment."
     )
